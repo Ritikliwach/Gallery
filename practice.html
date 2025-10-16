@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    /* General Reset */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+}
+
+/* Header Styling */
+h1, h2 {
+    margin: 55px 0;
+    text-align: center;
+    color: #f08804;
+}
+
+sup {
+    color: #f08804;
+}
+
+sub {
+    color: lightseagreen;
+}
+
+/* Footer Styling */
+footer {
+    background-color: black;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Navbar Styling */
+#navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    background-color: #0f1111;
+    padding: 10px;
+}
+
+#logo {
+    color: #f08804;
+    font-size: 25px;
+}
+
+a {
+    color: lightpink;
+    text-decoration: none;
+    padding: 10px;
+}
+
+/* Button Styling */
+button {
+    background-color: lightseagreen;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+    margin: 20px auto;
+    display: block;
+}
+
+button:hover {
+    background-color: #1abc9c;
+}
+
+/* Container and Box Styling */
+#container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.containerBox {
+    width: 200px;
+    height: 150px;
+    margin: 20px;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s, filter 0.3s;
+    border-radius: 13px;
+    box-shadow: 4px 7px 7px 0px rgba(0, 0, 0, 0.3);
+}
+
+.containerBox:hover {
+    transform: scale(1.1);
+    filter: grayscale(1);
+}
+
+/* Image Linking for Boxes */
+.containerBox[id*="link"] {
+    background-size: cover;
+    background-position: center;
+}
+
+#box1-link { background-image: url("images/ccar.jpg"); }   
+#box2-link { background-image: url("images/aheal.jpg"); }
+#box3-link { background-image: url("images/ahouse.jpg"); }
+/* Repeat for other boxes as necessary */
+
+/* Lightbox Styling */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.lightbox:target {
+    display: block;
+}
+
+.lightbox-content {
+    position: relative;
+    margin: 5% auto;
+    padding: 20px;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: black;
+    font-size: 35px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.close:hover, .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Slider Styling */
+.wrapper {
+    width: 100%;
+    height: 50vh;
+    box-shadow: 6px 6px 12px rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.wrapper-holder {
+    display: grid;
+    grid-template-columns: repeat(9, 100%);
+    height: 100%;
+    width: 100%;
+    animation: slider 30s ease-in-out infinite alternate;
+}
+
+.wrapper-holder img {
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+#slider-img-1 { background-image: url('images/ccar.jpg'); }
+#slider-img-2 { background-image: url('images/cheal.jpg'); }
+/* Repeat for other slider images as necessary */
+
+.button-holder {
+    position: absolute;
+    left: 45%;
+    bottom: 20px;
+    text-align: center;
+}
+
+.button {
+    background-color: white;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0.6rem;
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+}
+
+.button:hover {
+    box-shadow: 0px 0px 7px 4px rgba(0, 255, 255, 0.6);
+}
+
+@keyframes slider {
+    0%, 90% { transform: translateX(0%); }
+    10% { transform: translateX(-100%); }
+    20% { transform: translateX(-200%); }
+    30% { transform: translateX(-300%); }
+    40% { transform: translateX(-400%); }
+    50% { transform: translateX(-500%); }
+    60% { transform: translateX(-600%); }
+    70% { transform: translateX(-700%); }
+    80% { transform: translateX(-800%); }
+}
+
+/* Media Queries */
+@media (min-width: 640px) {
+    #container {
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 640px) {
+    #container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Section Visibility */
+#memories:target, #library:target, #search:target {
+    display: block;
+}
+
+#library h2, #search h2 {
+    margin-bottom: 20px;
+    color: #f08804;
+}
+
+.libraryBox, .searchBox {
+    display: inline-block;
+    margin: 10px;
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+#library img, #search img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+</style>
+<body>
+    <header>
+        <h1>PHOTO<sup>s</sup> <span><sub>Gallery</sub></span></h1>
+    </header>
+    <hr><hr><br><br>
+
+    <div class="container">
+        <div class="wrapper">
+            <div class="wrapper-holder" id="image-slider">
+                <img src="images/ccar.jpg" alt="Image 1">
+                <img src="images/aheal.jpg" alt="Image 2">
+                <img src="images/ahouse.jpg" alt="Image 3">
+                <!-- Additional images can go here -->
+            </div>
+            <div class="button-holder" id="button-holder">
+                <span class="button" onclick="moveToSlide(0)"></span>
+                <span class="button" onclick="moveToSlide(1)"></span>
+                <span class="button" onclick="moveToSlide(2)"></span>
+                <!-- Additional buttons for each image go here -->
+            </div>
+        </div>
+    </div>
+
+    <div id="container">
+        <a href="#box1" class="containerBox" id="box1-link"><img src="images/ccar.jpg" alt="Image 1"></a>
+        <a href="#box2" class="containerBox" id="box2-link"><img src="images/aheal.jpg" alt="Image 2"></a>
+        <a href="#box3" class="containerBox" id="box3-link"><img src="images/ahouse.jpg" alt="Image 3"></a>
+        <!-- More images in the gallery -->
+    </div>
+
+    <!-- Lightbox sections -->
+    <div class="lightbox" id="box1">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="images/ccar.jpg" alt="Image 1">
+        </div>
+    </div>
+    <div class="lightbox" id="box2">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="images/aheal.jpg" alt="Image 2">
+        </div>
+    </div>
+    <div class="lightbox" id="box3">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="images/ahouse.jpg" alt="Image 3">
+        </div>
+    </div>
+    <!-- Additional lightbox sections go here -->
+
+    <button id="add-photo-btn">Add Photo</button>
+    <input type="file" id="add-photo" accept="image/*" style="display:none;">
+
+    <script>
+        document.getElementById('add-photo-btn').addEventListener('click', function() {
+            document.getElementById('add-photo').click();
+        });
+
+        document.getElementById('add-photo').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const newImageSrc = e.target.result;
+
+                    // Add to slider
+                    const imgElement = document.createElement('img');
+                    imgElement.src = newImageSrc;
+                    imgElement.alt = 'New Image';
+                    document.getElementById('image-slider').appendChild(imgElement);
+
+                    // Add button to slide navigation
+                    const buttonElement = document.createElement('span');
+                    buttonElement.classList.add('button');
+                    buttonElement.onclick = () => moveToSlide(document.querySelectorAll('.wrapper-holder img').length - 1);
+                    document.getElementById('button-holder').appendChild(buttonElement);
+
+                    // Add to gallery
+                    const aElement = document.createElement('a');
+                    aElement.href = `#box${document.querySelectorAll('.lightbox').length + 1}`;
+                    aElement.classList.add('containerBox');
+                    const imgLinkElement = document.createElement('img');
+                    imgLinkElement.src = newImageSrc;
+                    imgLinkElement.alt = 'New Image';
+                    aElement.appendChild(imgLinkElement);
+                    document.getElementById('container').appendChild(aElement);
+
+                    // Add lightbox
+                    const lightboxElement = document.createElement('div');
+                    lightboxElement.classList.add('lightbox');
+                    lightboxElement.id = `box${document.querySelectorAll('.lightbox').length + 1}`;
+                    const lightboxContent = document.createElement('div');
+                    lightboxContent.classList.add('lightbox-content');
+                    const closeLink = document.createElement('a');
+                    closeLink.href = '#';
+                    closeLink.classList.add('close');
+                    closeLink.innerHTML = '&times;';
+                    const lightboxImg = document.createElement('img');
+                    lightboxImg.src = newImageSrc;
+                    lightboxImg.alt = 'New Image';
+                    lightboxContent.appendChild(closeLink);
+                    lightboxContent.appendChild(lightboxImg);
+                    lightboxElement.appendChild(lightboxContent);
+                    document.body.appendChild(lightboxElement);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function moveToSlide(index) {
+            const wrapperHolder = document.querySelector('.wrapper-holder');
+            const slideWidth = wrapperHolder.clientWidth / document.querySelectorAll('.wrapper-holder img').length;
+            wrapperHolder.style.transition = 'transform 0.5s ease-in-out';
+            wrapperHolder.style.transform = `translateX(-${index * slideWidth}px)`;
+        }
+    </script>
+
+    <footer>
+        <div id="navbar">
+            <a id="logo" href="#">PHOTOs</a>
+            <a href="library.html">Library</a>
+            <a href="search.html">Search</a>    
+        </div>
+    </footer>
+</body>
+</html>

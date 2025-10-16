@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <link rel="stylesheet" href="Gallery.css">
+</head>
+<body>
+    <header><h1>PHOTO<sup>s</sup> <span><sub>Gallery</sub></span></h1></header>
+    <hr><hr><br><br>
+    <div class="container">
+        <div class="wrapper">
+            <div class="wrapper-holder">
+                <div id="slider-img-1"></div>
+                <div id="slider-img-2"></div>
+                <div id="slider-img-3"></div>
+                <div id="slider-img-4"></div>
+                <div id="slider-img-5"></div>
+                <div id="slider-img-6"></div>
+                <div id="slider-img-7"></div>
+                <div id="slider-img-8"></div>
+                <div id="slider-img-9"></div>
+            </div>
+            <div class="button-holder">
+                <span class="button" onclick="moveToSlide(0)"></span>
+                <span class="button" onclick="moveToSlide(1)"></span>
+                <span class="button" onclick="moveToSlide(2)"></span>
+                <span class="button" onclick="moveToSlide(3)"></span>
+                <span class="button" onclick="moveToSlide(4)"></span>
+                <span class="button" onclick="moveToSlide(5)"></span>
+                <span class="button" onclick="moveToSlide(6)"></span>
+                <span class="button" onclick="moveToSlide(7)"></span>
+                <span class="button" onclick="moveToSlide(8)"></span>
+                <span class="button" onclick="moveToSlide(9)"></span>
+            </div>
+        </div>
+       
+
+    <script>
+        function moveToSlide(index) {
+            const wrapperHolder = document.querySelector('.wrapper-holder');
+            const slideWidth = wrapperHolder.clientWidth / 9;
+            wrapperHolder.style.transition = 'transform 0.5s ease-in-out';
+            wrapperHolder.style.transform = `translateX(-${index * slideWidth}px)`;
+        }
+    </script>
+    <div id="container">
+       <a href="#box1" class="containerBox" id="box1-link"></a>
+       <a href="#box2" class="containerBox" id="box2-link"></a>
+       <a href="#box3" class="containerBox" id="box3-link"></a>
+       <a href="#box4" class="containerBox" id="box4-link"></a>
+       <a href="#box5" class="containerBox" id="box5-link"></a>
+       <a href="#box6" class="containerBox" id="box6-link"></a>
+       <a href="#box7" class="containerBox" id="box7-link"></a>
+       <a href="#box8" class="containerBox" id="box8-link"></a>
+       <a href="#box9" class="containerBox" id="box9-link"></a>
+       <a href="#box10" class="containerBox" id="box10-link"></a>
+       <a href="#box11" class="containerBox" id="box11-link"></a>
+       <a href="#box12" class="containerBox" id="box12-link"></a>
+       <a href="#box13" class="containerBox" id="box13-link"></a>
+       <a href="#box14" class="containerBox" id="box14-link"></a>
+       <a href="#box15" class="containerBox" id="box15-link"></a>
+       <a href="#box16" class="containerBox" id="box16-link"></a>
+       <a href="#box17" class="containerBox" id="box17-link"></a>
+       <a href="#box18" class="containerBox" id="box18-link"></a>
+       <a href="#box19" class="containerBox" id="box19-link"></a>
+       <a href="#box20" class="containerBox" id="box20-link"></a>
+       <a href="#box21" class="containerBox" id="box21-link"></a>
+       <a href="#box22" class="containerBox" id="box22-link"></a>
+       <a href="#box23" class="containerBox" id="box23-link"></a>
+       <a href="#box24" class="containerBox" id="box24-link"></a>
+       <a href="#box25" class="containerBox" id="box25-link"></a>
+       <a href="#box26" class="containerBox" id="box26-link"></a>
+
+    <!-- Lightbox sections -->
+    <div class="lightbox" id="box1">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image1.zip/c" alt="Image 1">
+        </div>
+    </div>
+    <div class="lightbox" id="box2">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/aheal.jpg" alt="Image 2">
+        </div>
+    </div>
+    <div class="lightbox" id="box3">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/ahouse.jpg" alt="Image 3">
+        </div>
+    </div>
+    <div class="lightbox" id="box4">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/atree.jpg" alt="Image 4">
+        </div>
+    </div>
+    <div class="lightbox" id="box5">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/ecar.jpg" alt="Image 5">
+        </div>
+    </div>
+    <div class="lightbox" id="box6">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/fcar.jpg" alt="Image 6">
+        </div>
+    </div>
+    <div class="lightbox" id="box7">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/gcar.jpg" alt="Image 7">
+        </div>
+    </div>
+    <div class="lightbox" id="box8">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/bcar.jpg" alt="Image 8">
+        </div>
+    </div>
+    <div class="lightbox" id="box9">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/bheal.jpg" alt="Image 9">
+        </div>
+    </div>
+    <div class="lightbox" id="box10">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/cheal.jpg" alt="Image 10">
+        </div>
+    </div>
+    <div class="lightbox" id="box11">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/dheal.jpg" alt="Image 11">
+        </div>
+    </div>
+    <div class="lightbox" id="box12">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/eheal.jpg" alt="Image 12">
+        </div>
+    </div>
+    <div class="lightbox" id="box13">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/fheal.jpg" alt="Image 13">
+        </div>
+    </div>
+    <div class="lightbox" id="box14">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/acar.jpg" alt="Image 14">
+        </div>
+    </div>
+    <div class="lightbox" id="box15">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/bhouse.jpg" alt="Image 15">
+        </div>
+    </div>
+    <div class="lightbox" id="box16">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/chouse.jpg" alt="Image 16">
+        </div>
+    </div>
+    <div class="lightbox" id="box17">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/dhouse.jpg" alt="Image 17">
+        </div>
+    </div>
+    <div class="lightbox" id="box18">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/ehouse.jpg" alt="Image 18">
+        </div>
+    </div>
+    <div class="lightbox" id="box19">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/fhouse.jpg" alt="Image 19">
+        </div>
+    </div>
+    <div class="lightbox" id="box20">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/gheal.jpg" alt="Image 20">
+        </div>
+    </div>
+    <div class="lightbox" id="box21">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/dcar.jpg" alt="Image 21">
+        </div>
+    </div>
+    <div class="lightbox" id="box22">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/ctre.jpg" alt="Image 22">
+        </div>
+    </div>
+    <div class="lightbox" id="box23">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/dtree.jpg" alt="Image 23">
+        </div>
+    </div>
+    <div class="lightbox" id="box24">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/etree.jpg" alt="Image 24">
+        </div>
+    </div>
+    <div class="lightbox" id="box25">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/ftree.jpg" alt="Image 25">
+        </div>
+    </div>
+    <div class="lightbox" id="box26">
+        <div class="lightbox-content">
+            <a href="#" class="close">&times;</a>
+            <img src="image/gtree.jpg" alt="Image 26">
+        </div>
+    </div>
+
+    <footer>
+        <div id="navbar">
+            <a id="logo" href="#">PHOTOs</a>
+            <a href="library.html">Library</a>
+            <a href="search.html">Search</a>    
+        </div>
+    </footer>
+
+    <script src="Gallery.js"></script>
+    
+</body>
+</html>

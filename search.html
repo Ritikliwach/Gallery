@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Photos</title>
+    <link rel="stylesheet" href="Gallery.css">
+    <style>
+        /* Basic styles for the search form and results */
+        #search-container {
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        #search-input {
+            padding: 10px;
+            width: 400px;
+            font-size: 16px;
+        }
+
+        #suggestion-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            background: white;
+            z-index: 1;
+        }
+
+        #suggestion-list li {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #suggestion-list li:hover {
+            background-color:black;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #result-container {
+            margin-top: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .result-item {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .result-item img {
+            max-width: 150px;
+            max-height: 150px;
+            display: block;
+            margin: 0 auto;
+            border: 2px solid #ccc;
+            padding: 10px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .result-item img:hover {
+            transform: scale(1.1);
+        }
+
+        .result-item p {
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        /* Lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox-content {
+            position: relative;
+            margin: 5% auto;
+            padding: 20px;
+            max-width: 600px;
+        }
+
+        .lightbox-content img {
+            width: 100%;
+            height: auto;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            background: black;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        footer a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: lightskyblue;
+        }
+    </style>
+</head>
+<body>
+    <header><h1>PHOTO<sup>s</sup> <span><sub>Gallery</sub></span></h1></header>
+    <hr><hr><br><br><br>
+    
+    <div id="search-container">
+        <input type="text" id="search-input" placeholder="Enter photo name...">
+        <ul id="suggestion-list"></ul>
+        <button id="search-button">Search</button>
+    </div>
+
+    <div id="result-container"></div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <span class="close">&times;</span>
+            <img id="lightbox-image" src="" alt="Expanded Photo">
+        </div>
+    </div>
+    <script>
+        const photos = {
+            'ccar': 'image/ccar.jpg',
+            'aheal': 'image/aheal.jpg',
+            'ahouse': 'image/ahouse.jpg',
+            'atree': 'image/atree.jpg',
+            'ecar': 'image/ecar.jpg',
+            'fcar': 'image/fcar.jpg',
+            'gcar': 'image/gcar.jpg',
+            'bcar': 'image/bcar.jpg',
+            'bheal': 'image/bheal.jpg',
+            'cheal': 'image/cheal.jpg',
+            'dheal': 'image/dheal.jpg',
+            'eheal': 'image/eheal.jpg',
+            'fheal': 'image/fheal.jpg',
+            'acar': 'image/acar.jpg',
+            'bhouse': 'image/bhouse.jpg',
+            'chouse': 'image/chouse.jpg',
+            'dhouse': 'image/dhouse.jpg',
+            'ehouse': 'image/ehouse.jpg',
+            'fhouse': 'image/fhouse.jpg',
+            'gheal': 'image/gheal.jpg',
+            'dcar': 'image/dcar.jpg',
+            'btree': 'image/btree.jpg',
+            'ctree': 'image/ctree.jpg',
+            'dtree': 'image/dtree.jpg',
+            'etree': 'image/etree.jpg',
+            'ftree': 'image/ftree.jpg'
+        };
+
+        const searchInput = document.getElementById('search-input');
+        const suggestionList = document.getElementById('suggestion-list');
+        const resultContainer = document.getElementById('result-container');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const closeLightbox = document.querySelector('.close');
+
+        // Function to filter and display suggestions
+        searchInput.addEventListener('input', function() {
+            const query = searchInput.value.toLowerCase();
+            suggestionList.innerHTML = '';
+
+            if (query) {
+                for (let key in photos) {
+                    if (key.includes(query)) {
+                        const suggestionItem = document.createElement('li');
+                        suggestionItem.textContent = key;
+                        suggestionItem.addEventListener('click', function() {
+                            searchInput.value = key;
+                            suggestionList.innerHTML = '';
+                            displayResults(key);
+                        });
+                        suggestionList.appendChild(suggestionItem);
+                    }
+                }
+            }
+        });
+
+        // Function to display search results
+        document.getElementById('search-button').addEventListener('click', function() {
+            const query = searchInput.value.toLowerCase();
+            displayResults(query);
+        });
+
+        function displayResults(query) {
+            resultContainer.innerHTML = '';
+            let found = false;
+
+            for (let key in photos) {
+                if (key.includes(query)) {
+                    found = true;
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'result-item';
+
+                    const img = document.createElement('img');
+                    img.src = photos[key];
+                    img.alt = key;
+                    img.addEventListener('click', function() {
+                        openLightbox(img.src);
+                    });
+
+                    const caption = document.createElement('p');
+                    caption.textContent = key;
+
+                    resultItem.appendChild(img);
+                    resultItem.appendChild(caption);
+
+                    resultContainer.appendChild(resultItem);
+                }
+            }
+
+            if (!found) {
+                resultContainer.innerHTML = '<p>No photos found. Please try another search term.</p>';
+            }
+        }
+
+        // Function to open the lightbox
+        function openLightbox(src) {
+            lightboxImage.src = src;
+            lightbox.style.display = 'block';
+        }
+
+        // Function to close the lightbox
+        closeLightbox.addEventListener('click', function() {
+            lightbox.style.display = 'none';
+        });
+
+        // Close lightbox if clicked outside the image
+        window.addEventListener('click', function(event) {
+            if (event.target == lightbox) {
+                lightbox.style.display = 'none';
+            }
+        });
+    </script>
+    <div class="container">
+        <div class="wrapper">
+            <div class="wrapper-holder">
+                <div id="slider-img-1"></div>
+                <div id="slider-img-2"></div>
+                <div id="slider-img-3"></div>
+                <div id="slider-img-4"></div>
+                <div id="slider-img-5"></div>
+                <div id="slider-img-6"></div>
+                <div id="slider-img-7"></div>
+                <div id="slider-img-8"></div>
+                <div id="slider-img-9"></div>
+            </div>
+            
+        </div>
+       
+
+    <script>
+        function moveToSlide(index) {
+            const wrapperHolder = document.querySelector('.wrapper-holder');
+            const slideWidth = wrapperHolder.clientWidth / 9;
+            wrapperHolder.style.transition = 'transform 0.5s ease-in-out';
+            wrapperHolder.style.transform = `translateX(-${index * slideWidth}px)`;
+        }
+    </script>
+     <footer>
+        <div id="navbar">
+            <a id="logo" href="gallery.html">PHOTOs</a>
+            <a href="library.html">Library</a>
+            <a href="search.html">Search</a>
+        </div>
+    </footer>
+</body>
+</html>
